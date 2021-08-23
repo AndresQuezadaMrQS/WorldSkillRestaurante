@@ -5,6 +5,9 @@
  */
 package main;
 
+import controlador.ControladorClientes;
+import vista.LoginFrame;
+
 /**
  *
  * @author LATITUDE E6420
@@ -15,7 +18,9 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Hola");
+        LoginFrame frame = new LoginFrame();
+        ControladorClientes control = new ControladorClientes(frame);
+        frame.setVisible(true);
     }
     
 }

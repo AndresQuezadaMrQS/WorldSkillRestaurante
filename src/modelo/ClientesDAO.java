@@ -60,10 +60,11 @@ public class ClientesDAO {
             
             int resultado = PS.executeUpdate();
             if (resultado > 0) {
-                respuesta = "Clientes ";
+                respuesta = "Cliente registrado correctamente.";
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            respuesta = "El cliente no fue registrado.";
         } finally {
             miConexion = conexionActual.cerrarConexion();
         }

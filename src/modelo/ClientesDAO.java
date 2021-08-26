@@ -70,4 +70,26 @@ public class ClientesDAO {
         }
         return respuesta;
     }
+    
+    public boolean isEmailRegister(String email){
+        try {
+            miConexion = conexionActual.conectarConexion();
+            sql = "SELECT correo FROM tbl_clientes WHERE correo = ?";
+            
+            PS = miConexion.prepareStatement(sql);
+            PS.setString(1, email);
+            
+            RS = PS.executeQuery();
+            while(RS.next()){
+                if (email.equals(RS.getString("correo"))) {
+                   return true; 
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            miConexion = conexionActual.cerrarConexion();
+        }
+        return false;
+    }
 }

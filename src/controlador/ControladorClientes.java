@@ -11,6 +11,7 @@ import modelo.ClientesDAO;
 import modelo.ModeloClientes;
 import vista.LoginFrame;
 import vista.PresentacionFrame;
+import vista.RegistroFrame;
 
 /**
  *
@@ -19,12 +20,20 @@ import vista.PresentacionFrame;
 public class ControladorClientes extends Abstraccion {
 
     private ModeloClientes modeloClientes = new ModeloClientes();
-    private ClientesDAO clientesDAO = new ClientesDAO();
+    private final ClientesDAO clientesDAO = new ClientesDAO();
     private LoginFrame logFrame = new LoginFrame();
+    private RegistroFrame regFrame = new RegistroFrame();
 
     public ControladorClientes(LoginFrame logFrame2) {
         this.logFrame = logFrame2;
         logFrame.btnIngresar.addActionListener(this);
+        logFrame.btnIrARegistro.addActionListener(this);
+    }
+
+    public ControladorClientes(RegistroFrame regFrame) {
+        this.regFrame = regFrame;
+        this.regFrame.btnRegistrarme.addActionListener(this);
+        this.regFrame.btnVolver.addActionListener(this);
     }
 
     private void validarCredenciales() {
@@ -55,8 +64,60 @@ public class ControladorClientes extends Abstraccion {
         }
     }
 
-   
-    
+    private void registrarCliente() {
+        String nombre = regFrame.txtNombre.getText();
+        String ciudad = regFrame.txtCiudad.getText();
+        String correo = regFrame.txtCorreo.getText();
+        String pass = new String(regFrame.txtPass.getPassword());
+        String passConfirm = new String(regFrame.txtPassConfirm.getPassword());
+
+        if (!nombre.isEmpty() && !ciudad.isEmpty() && !correo.isEmpty()) {
+            if (!clientesDAO.isEmailRegister(correo)) {
+                if (pass.equals(passConfirm)) {
+                    modeloClientes.setNombre(nombre);
+                    modeloClientes.setCiudad(ciudad);
+                    modeloClientes.setCorreo(correo);
+                    modeloClientes.setPassword(passConfirm);
+                    String respuesta = clientesDAO.crearCliente(modeloClientes);
+                    if (respuesta != null) {
+                        JOptionPane.showMessageDialog(null, respuesta);
+                        limpiarLogFrame();
+                        volverAlLogin();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No se ingresaron los datos.");
+                        limpiarLogFrame();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "La contraseña no coincide.", "Contraseñas invalidas", 0);
+                    regFrame.txtPass.setText("");
+                    regFrame.txtPass.requestFocus();
+                    regFrame.txtPassConfirm.setText("");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "El correo ya esta registrado.", "Correo ya registrado", 0);
+                regFrame.txtCorreo.setText("");
+                regFrame.txtCorreo.requestFocus();
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Hay campos vacíos.");
+        }
+    }
+
+    private void volverAlLogin() {
+        regFrame.dispose();
+        LoginFrame login = new LoginFrame();
+        ControladorClientes control = new ControladorClientes(login);
+        login.setVisible(true);
+    }
+
+    private void irAlRegistro() {
+        logFrame.dispose();
+        RegistroFrame log = new RegistroFrame();
+        ControladorClientes control = new ControladorClientes(log);
+        log.setVisible(true);
+    }
+
     private void limpiarLogFrame() {
         logFrame.txtCorreo.requestFocus();
         logFrame.txtCorreo.setText("");
@@ -67,6 +128,12 @@ public class ControladorClientes extends Abstraccion {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == logFrame.btnIngresar) {
             validarCredenciales();
+        } else if (e.getSource() == logFrame.btnIrARegistro) {
+            irAlRegistro();
+        } else if (e.getSource() == regFrame.btnRegistrarme) {
+            registrarCliente();
+        } else if (e.getSource() == regFrame.btnVolver) {
+            volverAlLogin();
         }
     }
 }

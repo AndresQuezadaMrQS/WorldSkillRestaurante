@@ -32,7 +32,7 @@ public class LoginFrame extends javax.swing.JFrame {
         txtCorreo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         btnIngresar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnIrARegistro = new javax.swing.JButton();
         txtPass = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -51,7 +51,7 @@ public class LoginFrame extends javax.swing.JFrame {
 
         btnIngresar.setText("INGRESAR");
 
-        jButton2.setText("REGISTRO");
+        btnIrARegistro.setText("REGISTRO");
 
         txtPass.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtPass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -67,7 +67,7 @@ public class LoginFrame extends javax.swing.JFrame {
                         .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton2))
+                        .addComponent(btnIrARegistro))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(69, 69, 69)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -91,7 +91,7 @@ public class LoginFrame extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(btnIngresar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(btnIrARegistro)
                 .addGap(23, 23, 23))
         );
 
@@ -147,7 +147,7 @@ public class LoginFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnIngresar;
-    private javax.swing.JButton jButton2;
+    public javax.swing.JButton btnIrARegistro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

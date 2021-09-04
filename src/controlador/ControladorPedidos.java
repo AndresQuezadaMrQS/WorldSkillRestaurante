@@ -37,7 +37,7 @@ public class ControladorPedidos extends Abstraccion {
 
     public ControladorPedidos(PedidosEnCursoFrame pedidoCurso) {
         pedidoEnCurso = pedidoCurso;
-        pedidoEnCurso.addInternalFrameListener(this);
+        pruebaFrame.addInternalFrameListener(this);
     }
 
     public ControladorPedidos(PedidosRealizadosFrame pedidosRealiz) {
@@ -47,14 +47,15 @@ public class ControladorPedidos extends Abstraccion {
     public ControladorPedidos(RealizarPedidosFrame realizPedidos) {
         this.realizPedidos = realizPedidos;
     }
-    private PedidosEnCursoFrame pedidoFrame = null;
+    private PedidosEnCursoFrame pruebaFrame = null;
     
     private void irAPedidosEnCurso(){
-        if (pedidoFrame == null) {
-            pedidoFrame = new PedidosEnCursoFrame();
-            ControladorPedidos control = new ControladorPedidos(pedidoFrame);
-            presentFrame.desktopPane.add(pedidoFrame);
-            pedidoFrame.setVisible(true);
+        if (pruebaFrame == null) {
+            pruebaFrame = new PedidosEnCursoFrame();
+            ControladorPedidos control = new ControladorPedidos(pruebaFrame);
+            presentFrame.desktopPane.add(pruebaFrame);
+            pruebaFrame.setVisible(true);
+            System.out.println("Hola");
         }
     }
 
@@ -73,8 +74,9 @@ public class ControladorPedidos extends Abstraccion {
 
     @Override
     public void internalFrameClosed(InternalFrameEvent e) {
-        if (e.getSource() == pedidoEnCurso) {
-            pedidoFrame = null;
+        if (e.getSource() == pruebaFrame) {
+            pruebaFrame = null;
+            System.out.println("Hola3232");
         }
     }
 

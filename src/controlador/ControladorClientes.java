@@ -105,9 +105,7 @@ public class ControladorClientes extends Abstraccion {
         } else {
             JOptionPane.showMessageDialog(null, "Hay campos vacíos.");
         }
-    }
-
-    
+    } 
 
     private void volverAlLogin() {
         regFrame.dispose();

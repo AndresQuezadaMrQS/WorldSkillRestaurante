@@ -45,8 +45,9 @@ public class ControladorClientes extends Abstraccion {
                 if (modeloClientes != null) {
                     if (modeloClientes.getCorreo().equals(correo) && modeloClientes.getPassword().equals(pass)) {
                         logFrame.dispose();
-                        PresentacionFrame presentFrame = new PresentacionFrame();
-                        presentFrame.setVisible(true);
+                        PresentacionFrame present = new PresentacionFrame();
+                        ControladorPedidos control = new ControladorPedidos(present, modeloClientes);
+                        present.setVisible(true);
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "No existe un usuario "
@@ -106,6 +107,8 @@ public class ControladorClientes extends Abstraccion {
         }
     }
 
+    
+
     private void volverAlLogin() {
         regFrame.dispose();
         LoginFrame login = new LoginFrame();
@@ -136,6 +139,6 @@ public class ControladorClientes extends Abstraccion {
             registrarCliente();
         } else if (e.getSource() == regFrame.btnVolver) {
             volverAlLogin();
-        }
+        } 
     }
 }

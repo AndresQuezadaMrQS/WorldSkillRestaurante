@@ -26,7 +26,7 @@ public class ClientesDAO {
         ModeloClientes modelo = null;
         try {
             miConexion = conexionActual.conectarConexion();
-            sql = "SELECT correo, password FROM tbl_clientes WHERE correo = ? AND password = ?;";
+            sql = "SELECT nombre, correo, password FROM tbl_clientes WHERE correo = ? AND password = ?;";
 
             PS = miConexion.prepareStatement(sql);
             PS.setString(1, correo);
@@ -37,6 +37,7 @@ public class ClientesDAO {
                 modelo = new ModeloClientes();
                 modelo.setCorreo(RS.getString("correo"));
                 modelo.setPassword(RS.getString("password"));
+                modelo.setNombre(RS.getString("nombre"));
             }
 
         } catch (SQLException e) {

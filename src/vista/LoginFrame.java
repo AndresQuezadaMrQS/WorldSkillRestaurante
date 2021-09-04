@@ -16,6 +16,8 @@ public class LoginFrame extends javax.swing.JFrame {
      */
     public LoginFrame() {
         initComponents();
+        this.txtCorreo.setText("andres@gmail.com");
+        this.txtPass.setText("12345");
     }
 
     /**
@@ -37,6 +39,7 @@ public class LoginFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

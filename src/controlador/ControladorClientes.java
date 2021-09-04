@@ -97,6 +97,8 @@ public class ControladorClientes extends Abstraccion {
                 JOptionPane.showMessageDialog(null, "El correo ya esta registrado.", "Correo ya registrado", 0);
                 regFrame.txtCorreo.setText("");
                 regFrame.txtCorreo.requestFocus();
+                regFrame.txtPass.setText("");
+                regFrame.txtPassConfirm.setText("");
             }
 
         } else {

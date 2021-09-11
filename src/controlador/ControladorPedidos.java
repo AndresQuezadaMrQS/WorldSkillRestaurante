@@ -6,10 +6,6 @@
 package controlador;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.event.InternalFrameEvent;
 import modelo.ModeloClientes;
 import vista.*;
 
@@ -37,7 +33,6 @@ public class ControladorPedidos extends Abstraccion {
 
     public ControladorPedidos(PedidosEnCursoFrame pedidoCurso) {
         pedidoEnCurso = pedidoCurso;
-        pruebaFrame.addInternalFrameListener(this);
     }
 
     public ControladorPedidos(PedidosRealizadosFrame pedidosRealiz) {
@@ -70,14 +65,6 @@ public class ControladorPedidos extends Abstraccion {
          if (e.getSource() == presentFrame.btnPedidosEnCurso) {
              irAPedidosEnCurso();
          }
-    }
-
-    @Override
-    public void internalFrameClosed(InternalFrameEvent e) {
-        if (e.getSource() == pruebaFrame) {
-            pruebaFrame = null;
-            System.out.println("Hola3232");
-        }
     }
 
     /*@Override

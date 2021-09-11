@@ -15,9 +15,9 @@ import java.sql.SQLException;
  */
 public class Conexion {
 
-    private final String url = "jdbc:mysql://remotemysql.com:3306/dbSOCk1lEI";
-    private final String user = "dbSOCk1lEI";
-    private final String pass = "JuTnZYdveo";
+    private final String url = "jdbc:mysql://localhost/restaurante";
+    private final String user = "root";
+    private final String pass = "";
     private Connection miConexion = null;
 
     protected Connection conectarConexion() {

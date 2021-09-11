@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,7 +18,7 @@ import java.sql.SQLException;
 public class ClientesDAO {
 
     private String sql, respuesta = null;
-    private Conexion conexionActual = new Conexion();
+    private final Conexion conexionActual = new Conexion();
     private Connection miConexion;
     private ResultSet RS;
     private PreparedStatement PS;
@@ -26,7 +27,7 @@ public class ClientesDAO {
         ModeloClientes modelo = null;
         try {
             miConexion = conexionActual.conectarConexion();
-            sql = "SELECT nombre, correo, password FROM tbl_clientes WHERE correo = ? AND password = ?;";
+            sql = "SELECT id, nombre, correo, password FROM tbl_clientes WHERE correo = ? AND password = ?;";
 
             PS = miConexion.prepareStatement(sql);
             PS.setString(1, correo);
@@ -38,6 +39,7 @@ public class ClientesDAO {
                 modelo.setCorreo(RS.getString("correo"));
                 modelo.setPassword(RS.getString("password"));
                 modelo.setNombre(RS.getString("nombre"));
+                modelo.setId(RS.getInt("id"));
             }
 
         } catch (SQLException e) {
@@ -58,7 +60,7 @@ public class ClientesDAO {
             PS.setString(2, modelo.getCiudad());
             PS.setString(3, modelo.getCorreo());
             PS.setString(4, modelo.getPassword());
-            
+
             int resultado = PS.executeUpdate();
             if (resultado > 0) {
                 respuesta = "Cliente registrado correctamente.";
@@ -71,19 +73,19 @@ public class ClientesDAO {
         }
         return respuesta;
     }
-    
-    public boolean isEmailRegister(String email){
+
+    public boolean isEmailRegister(String email) {
         try {
             miConexion = conexionActual.conectarConexion();
             sql = "SELECT correo FROM tbl_clientes WHERE correo = ?";
-            
+
             PS = miConexion.prepareStatement(sql);
             PS.setString(1, email);
-            
+
             RS = PS.executeQuery();
-            while(RS.next()){
+            while (RS.next()) {
                 if (email.equals(RS.getString("correo"))) {
-                   return true; 
+                    return true;
                 }
             }
         } catch (SQLException e) {
@@ -93,4 +95,5 @@ public class ClientesDAO {
         }
         return false;
     }
+
 }

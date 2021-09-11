@@ -6,6 +6,9 @@
 package controlador;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.ModeloClientes;
 import vista.*;
 
@@ -13,14 +16,15 @@ import vista.*;
  *
  * @author LATITUDE E6420
  */
-public class ControladorPedidos extends Abstraccion {
+public class ControladorPresentacion extends Abstraccion {
 
-    private PedidosEnCursoFrame pedidoEnCurso = new PedidosEnCursoFrame();
-    private PedidosRealizadosFrame pedidosRealiz = new PedidosRealizadosFrame();
-    private RealizarPedidosFrame realizPedidos = new RealizarPedidosFrame();
+    static PedidosEnCursoFrame pedidoEnCurso = null;
+    static PedidosRealizadosFrame pedidosRealiz = null;
+    static CarritoComprasFrame realizarPedidos = null;
     private PresentacionFrame presentFrame = new PresentacionFrame();
+    static int enviarIdCliente;
 
-    public ControladorPedidos(PresentacionFrame prens, ModeloClientes modelo) {
+    public ControladorPresentacion(PresentacionFrame prens, ModeloClientes modelo) {
         presentFrame = prens;
         presentFrame.btnRealizarPedido.addMouseListener(this);
         presentFrame.btnRealizarPedido.addActionListener(this);
@@ -30,33 +34,39 @@ public class ControladorPedidos extends Abstraccion {
         presentFrame.btnPedidosEnCurso.addActionListener(this);
         bienvenidaUsuario(modelo, prens);
     }
-
-    public ControladorPedidos(PedidosEnCursoFrame pedidoCurso) {
-        pedidoEnCurso = pedidoCurso;
-    }
-
-    public ControladorPedidos(PedidosRealizadosFrame pedidosRealiz) {
-        this.pedidosRealiz = pedidosRealiz;
-    }
-
-    public ControladorPedidos(RealizarPedidosFrame realizPedidos) {
-        this.realizPedidos = realizPedidos;
-    }
-    private PedidosEnCursoFrame pruebaFrame = null;
     
     private void irAPedidosEnCurso(){
-        if (pruebaFrame == null) {
-            pruebaFrame = new PedidosEnCursoFrame();
-            ControladorPedidos control = new ControladorPedidos(pruebaFrame);
-            presentFrame.desktopPane.add(pruebaFrame);
-            pruebaFrame.setVisible(true);
-            System.out.println("Hola");
+        if (pedidoEnCurso == null) {
+            pedidoEnCurso = new PedidosEnCursoFrame();
+            ControladorInternalFrames control = new ControladorInternalFrames(pedidoEnCurso);
+            presentFrame.desktopPane.add(pedidoEnCurso);
+            pedidoEnCurso.setVisible(true);
         }
     }
-
+    
+    private void irPedidosRealizado(){
+        if (pedidosRealiz == null) {
+            pedidosRealiz = new PedidosRealizadosFrame();
+            ControladorInternalFrames control = new ControladorInternalFrames(pedidosRealiz);
+            presentFrame.desktopPane.add(pedidosRealiz);
+            pedidosRealiz.setVisible(true);
+        }
+    }
+    
+    private void irRealizarPedidos(){
+        if (realizarPedidos == null) {
+            realizarPedidos = new CarritoComprasFrame();
+            ControladorInternalFrames control = new ControladorInternalFrames(realizarPedidos);
+            presentFrame.desktopPane.add(realizarPedidos);
+            realizarPedidos.setVisible(true);
+        }
+    }
+    
     private void bienvenidaUsuario(ModeloClientes modelo, PresentacionFrame present) {
         if (modelo != null && present != null) {
             present.labelBienvenida.setText("Bienvenido, " + modelo.getNombre() + "!!");
+            enviarIdCliente = modelo.getId();
+            
         }
     }
     
@@ -64,13 +74,17 @@ public class ControladorPedidos extends Abstraccion {
     public void actionPerformed(ActionEvent e) {
          if (e.getSource() == presentFrame.btnPedidosEnCurso) {
              irAPedidosEnCurso();
+         } else if (e.getSource() == presentFrame.btnPedidosRealizados) {
+             irPedidosRealizado();
+         } else if (e.getSource() == presentFrame.btnRealizarPedido) {
+             irRealizarPedidos();
          }
     }
 
-    /*@Override
+    @Override
     public void mouseEntered(MouseEvent e) {
         try {
-            Thread.sleep(500);
+            Thread.sleep(200);
         } catch (InterruptedException ex) {
             Logger.getLogger(ControladorClientes.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -92,5 +106,5 @@ public class ControladorPedidos extends Abstraccion {
         } else if (e.getSource() == this.presentFrame.btnRealizarPedido) {
             presentFrame.btnRealizarPedido.setText("");
         }
-    }*/
+    }
 }

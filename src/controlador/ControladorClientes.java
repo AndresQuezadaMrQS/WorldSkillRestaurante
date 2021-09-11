@@ -46,7 +46,7 @@ public class ControladorClientes extends Abstraccion {
                     if (modeloClientes.getCorreo().equals(correo) && modeloClientes.getPassword().equals(pass)) {
                         logFrame.dispose();
                         PresentacionFrame present = new PresentacionFrame();
-                        ControladorPedidos control = new ControladorPedidos(present, modeloClientes);
+                        ControladorPresentacion control = new ControladorPresentacion(present, modeloClientes);
                         present.setVisible(true);
                     }
                 } else {

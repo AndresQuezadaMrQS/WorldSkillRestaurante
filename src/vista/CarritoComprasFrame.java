@@ -9,12 +9,12 @@ package vista;
  *
  * @author LATITUDE E6420
  */
-public class RealizarPedidosFrame extends javax.swing.JInternalFrame {
+public class CarritoComprasFrame extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form RealizarPedidosFrame
      */
-    public RealizarPedidosFrame() {
+    public CarritoComprasFrame() {
         initComponents();
     }
 
@@ -26,6 +26,10 @@ public class RealizarPedidosFrame extends javax.swing.JInternalFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
+        setClosable(true);
+        setResizable(true);
+        setTitle("Realizar Pedidos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
